@@ -1,0 +1,5 @@
+short-drama-project-*
+__pycache__/
+*.pyc
+*.pyo
+*.zip
