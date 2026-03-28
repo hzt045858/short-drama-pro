@@ -519,4 +519,21 @@ Get in the car. I'll drive you home.
                 print("  • 专业剧本格式（场景、对话、动作）")
                 print("  • 拍摄备注和音乐提示")
                 print("  • 创作分析和爽点设置")
-                print("  •
+                print("  • 项目文件已写入对应剧本目录")
+                print("\n🚀 下一步：")
+                print("  short-drama-pro check 1      # 自检第1集剧本")
+                print("="*60)
+                return True
+
+        return False
+
+
+def main():
+    """主函数"""
+    generator = EpisodeGenerator()
+    ok = generator.run()
+    raise SystemExit(0 if ok else 1)
+
+
+if __name__ == "__main__":
+    main()

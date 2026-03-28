@@ -166,8 +166,8 @@ class CharacterDeveloper:
 3. 反派自食恶果
 
 ---
-*角色档案生成时间：{datetime.now().strftime('%Y年%m月%d日 %H:%M')}*
-""".format(datetime.now=datetime.now)
+*角色档案生成时间：{time_str}*
+""".format(time_str=datetime.now().strftime('%Y年%m月%d日 %H:%M'))
     
     def _generate_true_heir_characters(self):
         """生成真千金是学霸角色"""
@@ -289,8 +289,8 @@ class CharacterDeveloper:
 4. 亲情温暖时刻
 
 ---
-*角色档案生成时间：{datetime.now().strftime('%Y年%m月%d日 %H:%M')}*
-""".format(datetime.now=datetime.now)
+*角色档案生成时间：{time_str}*
+""".format(time_str=datetime.now().strftime('%Y年%m月%d日 %H:%M'))
     
     def _generate_general_characters(self, theme):
         """通用角色生成"""
@@ -405,8 +405,8 @@ class CharacterDeveloper:
 3. 冲突解决要合理满意
 
 ---
-*角色档案生成时间：{datetime.now().strftime('%Y年%m月%d日 %H:%M')}*
-""".format(datetime.now=datetime.now)
+*角色档案生成时间：{time_str}*
+""".format(time_str=datetime.now().strftime('%Y年%m月%d日 %H:%M'))
     
     def save_characters(self):
         """保存角色档案"""
@@ -474,7 +474,11 @@ class CharacterDeveloper:
 
 def main():
     """主函数"""
-    developer = CharacterDeveloper()
+    import argparse
+    parser = argparse.ArgumentParser(description='角色开发')
+    parser.add_argument('--project-dir', help='项目目录')
+    args = parser.parse_args()
+    developer = CharacterDeveloper(project_dir=Path(args.project_dir) if args.project_dir else None)
     developer.run()
 
 if __name__ == "__main__":

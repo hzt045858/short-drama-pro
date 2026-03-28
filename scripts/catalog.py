@@ -366,7 +366,11 @@ class CatalogGenerator:
 
 def main():
     """主函数"""
-    generator = CatalogGenerator()
+    import argparse
+    parser = argparse.ArgumentParser(description='生成剧集目录')
+    parser.add_argument('--project-dir', help='项目目录')
+    args = parser.parse_args()
+    generator = CatalogGenerator(project_dir=Path(args.project_dir) if args.project_dir else None)
     generator.run()
 
 if __name__ == "__main__":

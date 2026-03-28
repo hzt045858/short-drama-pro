@@ -10,6 +10,10 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
+
+def is_interactive():
+    return sys.stdin.isatty()
+
 class ProjectStarter:
     """项目启动器"""
     
@@ -251,14 +255,14 @@ class ProjectStarter:
         # 创建项目目录
         self.create_project_dir()
         
-        # 收集配置信息
-        theme = parsed_args.theme or self.select_theme()
-        audience = parsed_args.audience or self.select_audience()
-        tone = parsed_args.tone or self.select_tone()
-        ending = parsed_args.ending or self.select_ending()
-        episodes = parsed_args.episodes or self.select_episodes()
-        overseas = parsed_args.overseas or self.ask_overseas()
-        language = parsed_args.language or self.select_language(overseas)
+        # 收集配置信息；非交互环境下使用默认值，避免 input() 报 EOF
+        theme = parsed_args.theme or (self.select_theme() if is_interactive() else '霸道总裁')
+        audience = parsed_args.audience or (self.select_audience() if is_interactive() else '女频')
+        tone = parsed_args.tone or (self.select_tone() if is_interactive() else '爽燃')
+        ending = parsed_args.ending or (self.select_ending() if is_interactive() else 'HE')
+        episodes = parsed_args.episodes or (self.select_episodes() if is_interactive() else 60)
+        overseas = parsed_args.overseas or (self.ask_overseas() if is_interactive() else False)
+        language = parsed_args.language or (self.select_language(overseas) if is_interactive() else ('英文' if overseas else '中文'))
         
         # 创建配置文件
         config_file = self.create_config(theme, audience, tone, ending, episodes, language, overseas)
